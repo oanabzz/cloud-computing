@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--&#45;&#45;light-blue: #83d1df;-->
+<!--&#45;&#45;dark-blue: #304e64;-->
+<!--&#45;&#45;orange: #f48455;-->
+<!--&#45;&#45;grey: #e6e6e5-->
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <title>
+        Advice no one asked for - METRICS
+    </title>
+    <script src="js/pretty-metrics.js"></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<style>
+    html, body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .nav-wrapper {
+        background-color: #E0115F;
+        color: #fce205;
+    }
+
+
+    .nav-wrapper {
+        /*background-image: url('FUNDAL.png');*/
+        font-size: larger;
+        font-weight: bold;
+    }
+
+    .card-panel {
+        background-color: #FFEAF2;
+        position: relative;
+        height: auto;
+    }
+
+
+    .titles {
+        font-size: xx-large;
+        font-weight: bolder;
+    }
+
+    .content {
+        font-size: medium;
+    }
+
+
+</style>
+
+<body>
+<nav class="nav-wrapper"><span class="brand-logo" style="color: white;">Advice no one asked for - METRICS</span></nav>
+<br>
+<div>
+    <div class="card-panel" id="advice">
+        <p class="titles">api.adviceslip.com/advice</p>
+        <!--<p class="content"><b>Average Latency:</b> 333<br><b>Latest known code:</b> 200 </p>-->
+    </div>
+
+    <div class="card-panel" id="translation">
+        <p class="titles">api.funtranslations.com/translate</p>
+    </div>
+
+    <div class="card-panel" id="polly">
+        <p class="titles">AWSPolly</p>
+    </div>
+
+    <div class="card-panel" id="full">
+        <p class="titles">/advice</p>
+    </div>
+</div>
+</body>

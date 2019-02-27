@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <title>
+        Advice no one asked for
+    </title>
+    <script src="js/index.js"></script>
+</head>
+
+<style>
+    html, body {
+        font-family: 'Montserrat', sans-serif;
+        /*background-image: url("../res/back.png");*/
+        /*background-position: center;*/
+        /*background-repeat: no-repeat;*/
+        /*background-size: cover;*/
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    .btn-flat {
+        background-color: #FE7F9C;
+        color: #E0115F;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        display: block;
+        text-align: center;
+        width: 200px;
+        height: 100px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color .2s;
+        font-weight: bold;
+    }
+
+    .btn-flat:hover {
+        background-color: #E0115F;
+        color: #fce205;
+    }
+
+
+    .nav-wrapper {
+        font-size: larger;
+        font-weight: bold;
+        background-color: #E0115F;
+        /*color: white;*/
+    }
+
+    .mydiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+        cursor: pointer;
+        transition: background-color .2s;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 100px;
+
+    }
+    .image{
+        height: 300px;
+        position: absolute;
+        margin-top: 20px;
+        margin-left: 200px;
+        display: none;
+    }
+
+    #text-div{
+        position: absolute;
+        width: 400px;
+        margin-left: 650px;
+        margin-top: 30px;
+        font-size: xx-large;
+    }
+
+    #loading{
+        position: relative;
+        height: 400px;
+        display: none;
+        margin: auto;
+    }
+
+    #tooManyReq{
+        position: relative;
+        height: 400px;
+        display: none;
+        margin: auto;
+    }
+
+    #internal{
+        position: relative;
+        height: 400px;
+        display: none;
+        margin: auto;
+    }
+
+    /*#yoda{*/
+        /*display:block;*/
+    /*}*/
+
+    /*#drogo{*/
+        /*display: block;*/
+    /*}*/
+
+
+</style>
+
+<body>
+<nav class="nav-wrapper"><span class="brand-logo" style="color: white;">Advice no one asked for</span></nav>
+<br>
+<div>
+    <div class="mydiv">
+        <button class="btn-flat" onclick="getFact()">CLICK HERE!</button>
+    </div>
+    <div>
+        <img src="../res/loading.gif" id="loading">
+        <img src="../res/429.png" id="tooManyReq">
+        <img src="../res/500.png" id="internal">
+        <img src="../res/yoda.png" id = "yoda" class="image">
+        <img src="../res/orc.png" id = "orcish" class="image">
+        <img src="../res/khal-drogo.png" id = "drogo" class="image">
+        <img src="../res/minion.png" id = "minion" class="image">
+        <img src="../res/pirate.png" id = "pirate" class="image">
+        <img src="../res/shakespeare.png" id = "shakespeare" class="image">
+        <div id="text-div">
+            <!--<p>-->
+                <!--sal-->
+            <!--</p>-->
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--<title>-->
+<!--CriC - Login-->
+<!--</title>-->
+<!--<meta charset="UTF-8">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">-->
+<!--</head>-->
+
+
+<!--<body>-->
+<!--<div class="bg">-->
+<!--<p>-->
+<!--SALLLLLL-->
+<!--</p>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
