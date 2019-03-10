@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="dep">
+    <CLASSES>
+      <root url="file://$USER_HOME$/IdeaProjects/Cloud1/dep" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/IdeaProjects/Cloud1/dep" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/IdeaProjects/Cloud1/dep" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/IdeaProjects/Cloud1/dep" recursive="false" type="SOURCES" />
+  </library>
+</component>
