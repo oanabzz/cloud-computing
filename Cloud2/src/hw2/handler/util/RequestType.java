@@ -7,15 +7,20 @@ public enum RequestType {
     POST_USER("POST", "/users"),
     GET_USERS("GET", "/users"),
     GET_USER("GET", "/users/[a-zA-Z0-9]+"),
-    UPDATE_USER("PATCH", "/users/[a-zA-Z0-9]+"),
+    UPDATE_USER("PUT", "/users/[a-zA-Z0-9]+"),
+    UPDATE_USERS("PUT", "/users"),
+    DELETE_USER("DELETE", "/users/[a-zA-Z0-9]+"),
+    DELETE_ALL_USERS("DELETE", "/users"),
+    PATCH_USER("PATCH", "/users/[a-zA-Z0-9]+"),
+
     POST_PLACE("POST", "/places/[a-zA-Z0-9]+"),
-    GET_PLACE("GET", "/places/[a-zA-Z0-9]+"),
+    GET_PLACES_OF_USER("GET", "/places/[a-zA-Z0-9]+"),
     GET_PLACES("GET", "/places"),
     GET_PLACE_WITH_ID("GET", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
     UPDATE_PLACE_WITH_ID("PATCH", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
     //TODO: check below!!
     DELETE_PLACE("DELETE", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
-    UNKNOWN("",".");
+    UNKNOWN("", ".");
 
     private String verb;
     private Pattern regex;

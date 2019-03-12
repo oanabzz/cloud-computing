@@ -1,6 +1,7 @@
 package hw2.handler;
 
 import com.amazonaws.util.IOUtils;
+import com.google.gson.JsonParseException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import hw2.handler.repo.UsersRepo;
@@ -12,52 +13,88 @@ import java.io.OutputStream;
 
 public class UsersHandler implements HttpHandler {
 
-    private static final String SET_COOKIE = "Set-Cookie";
-//    private UsersRepo usersRepo = new UsersRepo();
-
     @Override
     public void handle(HttpExchange exchange) {
-        System.out.println("got a users req");
         Response response = new Response();
         UsersRepo usersRepo = new UsersRepo();
         switch (RequestType.getRequestType(exchange.getRequestMethod(), exchange.getRequestURI().getPath())) {
             case GET_USER: {
-                System.out.println("GET USER");
                 String username = exchange.getRequestURI().getPath().split("/")[2];
                 response = usersRepo.getUser(username);
                 System.out.println(response);
                 break;
             }
-            case GET_USERS:{
-                System.out.println("GET USERS");
+            case GET_USERS: {
                 response = usersRepo.getUsers();
                 System.out.println(response);
                 break;
             }
-//            case POST_USER: {
-//                String json = null;
-//                try {
-//                    json = IOUtils.toString(exchange.getRequestBody());
-//                    response = usersRepo.postUser(json);
-//                } catch (IOException e) {
-//                    response = new Response("", 500);
-//                }
-//                break;
-//            }
-//            case UPDATE_USER: {
-//                try {
-//                    String json = IOUtils.toString(exchange.getRequestBody());
-//                    String username = exchange.getRequestURI().getPath().split("/")[2];
-//                    if (!Verification.userRequiredVerification(Verification.getCookie(exchange.getRequestHeaders()), username)) {
-//                        response = new Response("", 403);
-//                    } else {
-//                        response = usersRepo.updateUser(json, username);
-//                    }
-//                } catch (IOException e) {
-//                    response = new Response("", 500);
-//                }
-//                break;
-//            }
+            case POST_USER: {
+                String json = null;
+                try {
+                    json = IOUtils.toString(exchange.getRequestBody());
+                    response = usersRepo.postUser(json);
+                } catch (IOException e) {
+                    response = new Response("", 500);
+                    System.out.println("BAD REQUEST HERE");
+                    break;
+                } catch (JsonParseException e) {
+                    response = new Response("", 400);
+                    System.out.println("WRONG JSON HERE");
+                    break;
+                }
+                break;
+            }
+            case UPDATE_USER: {
+                try {
+                    String json = IOUtils.toString(exchange.getRequestBody());
+                    response = usersRepo.updateUser(json);
+                } catch (IOException e) {
+                    response = new Response("", 500);
+                    break;
+                } catch (JsonParseException e) {
+                    response = new Response("", 400);
+                    break;
+                }
+                break;
+            }
+            case UPDATE_USERS: {
+                try {
+                    String json = IOUtils.toString(exchange.getRequestBody());
+                    response = usersRepo.updateUsers(json);
+                } catch (IOException e) {
+                    response = new Response("", 500);
+                    break;
+                } catch (JsonParseException e) {
+                    response = new Response("", 400);
+                    break;
+                }
+                break;
+            }
+            case DELETE_ALL_USERS: {
+                try {
+                    response = usersRepo.deleteAllUsers();
+                } catch (InterruptedException e) {
+                    response = new Response("", 500);
+                    break;
+                }
+                break;
+            }
+            case DELETE_USER: {
+                response = usersRepo.deleteUser(exchange.getRequestURI().getPath().split("/")[2]);
+                break;
+            }
+            case PATCH_USER: {
+                try {
+                    String json = IOUtils.toString(exchange.getRequestBody());
+                    String username = exchange.getRequestURI().getPath().split("/")[2];
+                    response = usersRepo.patchUser(json, username);
+                } catch (IOException e) {
+                    response = new Response("", 500);
+                    break;
+                }
+                break;
+            }
             default: {
                 System.out.println("UNKNOWN WTF");
                 response.setCode(400);

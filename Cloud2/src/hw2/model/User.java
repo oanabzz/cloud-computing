@@ -124,8 +124,31 @@ public class User {
         this.salt = salt;
     }
 
-    public void addPlace(String place){
+    public void addPlace(String place) {
         this.places.add(place);
+    }
+
+    public boolean isNull() {
+        if (this.username == null) {
+            return true;
+        }
+        if (this.password == null) {
+            return true;
+        }
+        if (this.loginDate == null) {
+            return true;
+        }
+        if (this.role == null) {
+            return true;
+        }
+        if (this.places == null) {
+            return true;
+        }
+        if (this.salt == null) {
+            return true;
+        }
+        return false;
+
     }
 
     @Override

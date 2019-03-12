@@ -48,6 +48,14 @@ public class DynamoDbDao implements DatabaseDao {
         table.deleteItem(primaryColumn, primaryKey);
     }
 
+    @Override
+    public void deleteTable(String tableName) throws InterruptedException {
+        Table table = connection.getTable(tableName);
+        table.delete();
+        table.waitForDelete();
+    }
+
+
     public List<Item> getCollection(String tableName) {
         Table table = connection.getTable(tableName);
         List<Item> result = new LinkedList<>();

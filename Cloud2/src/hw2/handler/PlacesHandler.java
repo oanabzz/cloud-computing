@@ -3,7 +3,6 @@ package hw2.handler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import hw2.handler.repo.PlacesRepo;
-import hw2.handler.repo.UsersRepo;
 import hw2.handler.util.RequestType;
 import hw2.handler.util.Response;
 
@@ -18,14 +17,14 @@ public class PlacesHandler implements HttpHandler {
         Response response = new Response();
         PlacesRepo placesRepo = new PlacesRepo();
         switch (RequestType.getRequestType(exchange.getRequestMethod(), exchange.getRequestURI().getPath())) {
-            case GET_PLACE: {
-                String username = exchange.getRequestURI().getPath().split("/")[2];
-                response = placesRepo.getPlace(username);
-                System.out.println(response);
-                break;
-            }
+//            case GET_PLACE: {
+//                String username = exchange.getRequestURI().getPath().split("/")[2];
+//                response = placesRepo.getPlace(username);
+//                System.out.println(response);
+//                break;
+//            }
             case GET_PLACES: {
-                response = placesRepo.getPlaces();
+                response = placesRepo.getAllPlaces();
                 System.out.println(response);
                 break;
             }

@@ -13,7 +13,7 @@ public class Place {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.userId=userId;
+        this.userId = userId;
         this.name = name;
         this.danger = false;
     }
@@ -73,6 +73,28 @@ public class Place {
 
     public Boolean getDanger() {
         return danger;
+    }
+
+    public boolean isNull() {
+        if (this.danger == null) {
+            return true;
+        }
+        if (this.id == null) {
+            return true;
+        }
+        if (this.latitude == null) {
+            return true;
+        }
+        if (this.longitude == null) {
+            return true;
+        }
+        if (this.name == null) {
+            return true;
+        }
+        if (this.userId == null) {
+            return true;
+        }
+        return false;
     }
 
     @Override

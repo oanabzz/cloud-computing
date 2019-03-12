@@ -8,4 +8,6 @@ public interface DatabaseDao {
     void updateItem(String tableName, String primaryColumn, String primaryKey, Object item);
 
     void deleteItem(String tableName, String primaryColumn, String primaryKey);
+
+    void deleteTable(String tableName) throws InterruptedException;
 }
