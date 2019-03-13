@@ -1,7 +1,6 @@
 package hw2.handler.repo;
 
 import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.glue.model.Table;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import hw2.data.DynamoDbDao;
@@ -24,6 +23,7 @@ public class PlacesRepo {
     private PlacesConverter converter;
     private UserConverter userConverter;
     private Gson gson;
+    private static final String LOCATION = "Location";
 
     public PlacesRepo() {
         this.dao = new DynamoDbDao();
@@ -119,20 +119,37 @@ public class PlacesRepo {
         Response response;
         Place place = gson.fromJson(placeJson, Place.class);
 
+        if (place.postIsNull()) {
+            return new Response("", 400);
+        }
+
         // if there is no user with the given username
-        if (dao.getItem(Tables.USERS.getName(), Tables.USERS.primaryKey(), username) == null) {
+        Item item = dao.getItem(Tables.USERS.getName(), Tables.USERS.primaryKey(), username);
+        if (item == null) {
             return new Response("", 404);
         }
-        if (dao.getItem(Tables.PLACES.getName(), Tables.PLACES.primaryKey(), place.getId()) == null) {
-            dao.addItem(Tables.PLACES.getName(), converter.toItem(place));
 
-            // update the user, adik add the place to the user's list
-            User user = userConverter.fromItem(dao.getItem(Tables.USERS.getName(), Tables.USERS.primaryKey(), place.getUserId()));
-            user.addPlace(place.getId());
-            dao.addItem(Tables.USERS.getName(), new UserConverter().toItem(user));
-            response = new Response("", 201);
-        } else
-            response = new Response("", 409);
+        // compute place id
+        Integer max = 1;
+        User user = userConverter.fromItem(item);
+
+        for (String id : user.getPlaces()) {
+            Integer current = Integer.parseInt(id.split("_")[1]);
+            if (current > max) {
+                max = current;
+            }
+        }
+        Integer id = max + 1;
+        String placeID = username + "_" + id.toString();
+        place.setId(placeID);
+
+        // override the place in the DB
+        dao.addItem(Tables.PLACES.getName(), converter.toItem(place));
+        // update the user, adik add the place to the user's list
+        user.addPlace(place.getId());
+        dao.addItem(Tables.USERS.getName(), new UserConverter().toItem(user));
+        response = new Response("", 201);
+        response.setHeaders(LOCATION, "/places/" + username + "/" + placeID);
         return response;
     }
 
@@ -176,7 +193,11 @@ public class PlacesRepo {
 
         // aaaand add it
         Place place = gson.fromJson(placeJson, Place.class);
-        // TODO: check for null attributes
+
+        if (place.isNull()) {
+            return new Response("", 400);
+        }
+
         dao.addItem(Tables.PLACES.getName(), converter.toItem(place));
         response = new Response("", 200);
         return response;
@@ -188,7 +209,10 @@ public class PlacesRepo {
         }.getType();
         List<Place> placesToBeUpdated = gson.fromJson(placesJson, listType);
         for (Place place : placesToBeUpdated) {
-            if (dao.getItem(Tables.PLACES.getName(), Tables.PLACES.getName(), place.getId()) == null) {
+            if (place.isNull()) {
+                return new Response("", 400);
+            }
+            if (dao.getItem(Tables.PLACES.getName(), Tables.PLACES.primaryKey(), place.getId()) == null) {
                 return new Response("", 409);
             }
         }
@@ -203,6 +227,12 @@ public class PlacesRepo {
     public Response deletePlace(String username, String placeID) {
         Response response = new Response("", 200);
         System.out.println("REPO: " + placeID);
+        if (dao.getItem(Tables.USERS.getName(), Tables.USERS.primaryKey(), username) == null) {
+            return new Response("", 404);
+        }
+        if (dao.getItem(Tables.PLACES.getName(), Tables.PLACES.primaryKey(), placeID) == null) {
+            return new Response("", 404);
+        }
         dao.deleteItem(Tables.PLACES.getName(), Tables.PLACES.primaryKey(), placeID);
         User user = userConverter.fromItem(dao.getItem(Tables.USERS.getName(), Tables.USERS.primaryKey(), username));
         user.getPlaces().remove(placeID);
@@ -223,7 +253,39 @@ public class PlacesRepo {
         for (Place place : result) {
             deletePlace(place.getUserId(), place.getId());
         }
+
+
+        // delete all the list of places from all users
+        List<Item> userScan = dao.getCollection(Tables.USERS.getName());
+        List<User> userResult = new LinkedList<>();
+        for (Item item : userScan) {
+            userResult.add(userConverter.fromItem(item));
+        }
+        for (User user : userResult) {
+            user.setPlaces(new LinkedList<>());
+            dao.addItem(Tables.USERS.getName(), userConverter.toItem(user));
+        }
         response = new Response("", 200);
+        return response;
+    }
+
+    public Response deleteAllUsersPlaces(String username) {
+        Response response = new Response("", 200);
+        Item item = dao.getItem(Tables.USERS.getName(), Tables.USERS.getName(), username);
+        if (item == null) {
+            return new Response("", 404);
+        }
+
+        User user = userConverter.fromItem(item);
+        // delete every entry from places table
+        for (String id : user.getPlaces()) {
+            dao.deleteItem(Tables.PLACES.getName(), Tables.PLACES.primaryKey(), id);
+        }
+
+        // update user with an empty places list
+        user.setPlaces(new LinkedList<>());
+        dao.addItem(Tables.USERS.getName(), userConverter.toItem(user));
+
         return response;
     }
 

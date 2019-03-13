@@ -13,13 +13,16 @@ public enum RequestType {
     DELETE_ALL_USERS("DELETE", "/users"),
     PATCH_USER("PATCH", "/users/[a-zA-Z0-9]+"),
 
-    POST_PLACE("POST", "/places/[a-zA-Z0-9]+"),
     GET_PLACES_OF_USER("GET", "/places/[a-zA-Z0-9]+"),
     GET_PLACES("GET", "/places"),
     GET_PLACE_WITH_ID("GET", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
-    UPDATE_PLACE_WITH_ID("PATCH", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
-    //TODO: check below!!
+    POST_PLACE("POST", "/places/[a-zA-Z0-9]+"),
+    UPDATE_PLACE_WITH_ID("PUT", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
+    UPDATE_PLACES_OF_USER("PUT", "/places/[a-zA-Z0-9]+"),
+    PATCH_PLACE("PATCH", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
     DELETE_PLACE("DELETE", "/places/[a-zA-Z0-9]+/[a-zA-Z0-9_]+"),
+    DELETE_PLACES_FROM_USER("DELETE", "/places/[a-zA-Z0-9]+"),
+    DELETE_ALL_PLACES("DELETE", "/places"),
     UNKNOWN("", ".");
 
     private String verb;

@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "7185b2b2-c270-455f-9107-e48757d2377f",
+		"name": "Cloud2",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPlacesOfUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPlaceWithID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPlaces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostPlace",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"longitude\": 25.52611590429683,\n        \"latitude\": 48.190002896803776,\n        \"name\": \"la bunici acasa lol\",\n        \"userId\": \"cristiana2\",\n        \"danger\": false\n    }"
+				},
+				"url": {
+					"raw": "localhost:6969/places/cristiana2",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"places",
+						"cristiana2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePlace",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"cristiana2_1\",\n        \"longitude\": 27.22,\n        \"latitude\": 47.22,\n        \"name\": \"Home\",\n        \"userId\": \"cristiana2\",\n        \"danger\": false\n    }"
+				},
+				"url": {
+					"raw": "localhost:6969/places/cristiana2/cristiana2_1",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"places",
+						"cristiana2",
+						"cristiana2_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePlaces",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n        \"id\": \"cristiana2_1\",\n        \"longitude\": 27.0,\n        \"latitude\": 47.0,\n        \"name\": \"Home\",\n        \"userId\": \"cristiana2\",\n        \"danger\": false\n    },\n    {\n        \"id\": \"cristiana2_2\",\n        \"longitude\": 28.0,\n        \"latitude\": 45.0,\n        \"name\": \"Home\",\n        \"userId\": \"cristiana2\",\n        \"danger\": false\n    }\n]"
+				},
+				"url": {
+					"raw": "localhost:6969/places/cristiana2",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"places",
+						"cristiana2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePlace",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

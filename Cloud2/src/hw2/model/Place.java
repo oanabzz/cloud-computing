@@ -97,6 +97,25 @@ public class Place {
         return false;
     }
 
+    public boolean postIsNull() {
+        if (this.danger == null) {
+            return true;
+        }
+        if (this.latitude == null) {
+            return true;
+        }
+        if (this.longitude == null) {
+            return true;
+        }
+        if (this.userId == null) {
+            return true;
+        }
+        if (this.name == null) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Place{" +

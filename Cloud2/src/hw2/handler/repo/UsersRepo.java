@@ -25,6 +25,7 @@ public class UsersRepo {
     class PatchUser {
         private String password;
         private String role = "common user";
+        private static final String LOCATION = "Location";
         private List<String> places = new LinkedList<>();
 
         public String getPassword() {
@@ -141,7 +142,7 @@ public class UsersRepo {
         User user = gson.fromJson(userJson, User.class);
         Response response;
         if (checkExistingUser(user.getUsername())) {
-            response = new Response("User already exists", 451);
+            response = new Response("User already exists", 409);
         } else {
             if (user.isNull()) {
                 return new Response("", 400);
@@ -149,7 +150,7 @@ public class UsersRepo {
             dao.addItem(Tables.USERS.getName(), converter.toItem(user));
             response = new Response("", 201);
             //TODO: Location headers
-//            response.setHeaders(SET_COOKIE, "Session=" + gson.toJson(cookie));
+            response.setHeaders("Location", "Location=localhost:6969/users/" + user.getUsername());
         }
         return response;
 
